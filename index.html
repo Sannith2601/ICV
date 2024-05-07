@@ -3,103 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parking Lot Dynamics Analysis</title>
+    <title>Anomaly Detection in Urban Video Surveillance</title>
     <style>
-        /* Add your CSS styles here */
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
+            margin: 40px;
         }
-
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        section {
+        header, section {
             margin-bottom: 20px;
         }
-
-        h2 {
-            color: #333;
+        img {
+            width: 100%; /* Adjust as needed */
+            max-width: 600px; /* Adjust as needed */
+            height: auto;
+            margin: 10px 0;
         }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+        .image-container {
+            display: flex;
+            justify-content: center;
+        }
+        .plot {
+            display: block;
+            margin: 20px auto;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Anomaly Detection in Urban Video Surveillance</h1>
+    </header>
 
-<!-- Header Section -->
-<header>
-    <h1>Understanding Parking Lot Dynamics: Analyzing Car Counts Using Computer Vision</h1>
-</header>
-
-<!-- Main Content Section -->
-<main>
-    <!-- Introduction Section -->
-    <section id="introduction">
+    <section>
         <h2>Introduction</h2>
-        <p>In this project, we aim to develop a computer vision system to count cars in a parking lot. This system can provide valuable information for parking lot owners, city planners, and transportation authorities. By analyzing car counts over time, we can optimize parking lot utilization, improve traffic flow, and enhance overall urban mobility.</p>
-        <!-- Example Image 1: <img src="example_image_1.jpg" alt="Example Image 1"> -->
-        <!-- Example Image 2: <img src="example_image_2.jpg" alt="Example Image 2"> -->
+        <p>As urban areas continue to expand, the complexity of maintaining safety and security grows exponentially. Motivated by this challenge, we chose to focus our project on anomaly detection in video surveillance, a critical component of modern urban security systems. Our interest in this field stems from its potential to significantly enhance the efficiency of monitoring public spaces. Below, we provide a couple of examples from our dataset that illustrate the typical urban scenes we analyze.</p>
+        
     </section>
 
-    <!-- Method Section -->
-    <section id="method">
+    <section>
         <h2>Method</h2>
-        <p>Our approach involves using a state-of-the-art object detection algorithm called YOLO (You Only Look Once) to detect cars in parking lot images. YOLO is known for its real-time performance and accuracy in detecting objects in images.</p>
-        <p>We begin by preprocessing the images and then pass them through the YOLO model. After obtaining the bounding boxes for detected cars, we count the number of cars present in each image. This count is then aggregated over multiple images to analyze car counts over time.</p>
+        <h3>Our Approach</h3>
+        <p>We employed a convolutional autoencoder, a deep learning model renowned for its ability to learn efficient data codifications in an unsupervised manner. This model was meticulously trained on a diverse dataset of normal surveillance footage to capture common patterns and activities in urban settings. By reconstructing the input video frames, the model was designed to pinpoint deviations from these learned patterns during its evaluation phase.</p>
+        <h3>Implementation Details</h3>
+        <ul>
+            <li><strong>Frame Extraction:</strong> We extracted 200 uniformly spaced frames from each video, converting them to grayscale and resizing them to 224x224 pixels to maintain consistency.</li>
+            <li><strong>Model Architecture:</strong> Our autoencoder features several layers of convolution for encoding and corresponding transposed convolution layers for decoding.</li>
+            <li><strong>Training:</strong> We trained the model on 'normal' video frames, optimizing the reconstruction error using the Adam optimizer and binary cross-entropy loss.</li>
+        </ul>
+        <p>Example output images showing the side-by-side comparison of the original and reconstructed frames to highlight the model’s reconstruction capability.</p>
     </section>
 
-    <!-- Results Section -->
-    <section id="results">
+    <section>
+	<h2>Code</h2>
+	<a href="cvi.pdf" target="_blank">View Code PDF</a>
+<!-- Embedding the PDF -->
+            <iframe src="cvi.pdf" width="100%" height="500px">
+                <p>Your browser does not support iframes. You can <a href="import cv2.pdf">download the PDF here</a>.</p>
+            </iframe>
         <h2>Results</h2>
-        <!-- Include results here -->
-        <p>plot</p>
-	<img src="plot.png">
+        <h3>Anomaly Detection Performance</h3>
+        <p>To assess the model's performance, we visualized the reconstruction errors, calculated as the mean squared error (MSE), across our test dataset. Frames with higher errors, which suggest potential anomalies, are flagged accordingly. Below is the plot that displays these errors over a sequence of test frames:</p>
+        <img src="plot.png" alt="MSE Plot" class="plot">
     </section>
 
-    <!-- Results Analysis Section -->
-    <section id="analysis">
+    <section>
         <h2>Analysis of Results</h2>
-        <!-- Include analysis of results here -->
-        <p>Analyzing car counts over a large set of images reveals interesting patterns and insights. By plotting the number of cars against time, we can observe:
-
-           <p>Peak hours: We observe peaks in car counts during specific hours of the day, indicating peak parking lot usage. This information can help parking lot operators optimize staffing and resources during busy periods.<p>
-           <p>usage trends: Analyzing trends over days or weeks can reveal usage patterns such as weekday vs. weekend usage, seasonal variations, and special event impacts.</p>
+        <h3>Insights Gained</h3>
+        <p>The analysis of MSE scores revealed that frames with abnormally high errors often correlated with unusual or unexpected activities, which were potential indicators of anomalies.</p>
+        <h3>Surprising Findings</h3>
+        <p>A notable observation was the model's sensitivity to varying lighting conditions, such as dynamic shadows, which were sometimes mistakenly identified as anomalies due to their significant visual difference from the norm.</p>
     </section>
 
-    <!-- Vision Algorithms Analysis Section -->
-    <section id="vision-algorithms">
+    <section>
         <h2>Analysis of Vision Algorithms</h2>
-        <!-- Include analysis of vision algorithms here -->
-        <p>Our experience with YOLO highlights the importance of robust vision algorithms for accurate car counting. We found that:
-
-<p>Model Tuning: Fine-tuning the YOLO model on parking lot images improves detection accuracy, especially in challenging conditions such as low light or occlusions.<p>
-<p>Data Preprocessing: Preprocessing techniques such as image normalization and augmentation can enhance model performance by reducing noise and improving generalization.<p>
-<p>Real-time Processing: YOLO's real-time processing capability allows for efficient analysis of large image datasets, making it suitable for applications requiring timely insights.<p>
-By understanding the strengths and limitations of vision algorithms like YOLO, we can develop effective computer vision systems for diverse applications, including parking lot management.
-
-</p>
-    </section>
-</main>
-
-
-</body>
-</html>
+        <p>The convolutional autoencoder demonstrated a commendable ability to detect deviations from typical patterns, underscoring its viability for this application. However, its effectiveness was somewhat dependent on the uniformity and quality of the training data.</p>
+        <p>To improve accuracy, we strategically excluded night-time images from our training dataset. These images often introduced noise and inconsistencies that adversely affected the model
